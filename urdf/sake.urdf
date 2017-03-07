@@ -3,7 +3,7 @@
 	<link name="base_link">
 		<visual>
 			<geometry>
-				<cylinder length="0.1" radius="0.1"/>
+				<cylinder length="0.1" radius="0.05"/>
 			</geometry>
 			<material name="white">
 				<color rgba="0 0 .8 1"/>
@@ -14,7 +14,7 @@
 	<link name="base_rotator_link">
 		<visual>
 			<geometry>
-				<sphere radius="0.09"/>
+				<sphere radius="0.05"/>
 			</geometry>
 		</visual>
 
@@ -22,28 +22,45 @@
 
 	<joint  name="base_to_rotoator_joint" type="continuous">
 
-		<axis xyz="0 0 1"/>
+		<axis xyz="0 0 0.1"/>
 		<parent link ="base_link"/>
 		<child link="base_rotator_link"/>
-		<origin xyz ="0 0 0.04"/>
+		<origin xyz ="0 0 0.1" rpy="0 0 0"/>
 	</joint>
 	
 
 	<link name="link_arm">
-		<visaul>
+		<visual>
 			<geometry>
-				<cylinder length="0.7" radius="0.08"/>
+				<cylinder length="0.3" radius="0.013"/>
 			</geometry>
-			<material name="gray"/>
-		</visaul>
+			<origin xyz="0.09 0 0.1" rpy="0 3.5 0"/>
+			<material name="black"/>
+		</visual>
 	</link>
 
 	<joint name="base_arm_joint" type="fixed">
-    
-		<origin rpy="0 0 0" xyz="0 0.1 0.3 "/>
+    	<axis xyz="1 0 0"/>
+		<origin rpy="0 1 0" xyz="0 0 0 "/>
 		<parent link="base_rotator_link"/>
 		<child link="link_arm"/>
 	</joint>
+	
+	<link name="arm_rotator_link">
+		<visual>
+			<geometry>
+				<box size="0.03 0.03 0.03"/>
+			</geometry>
+		</visual>
+	</link>
+	
+	<joint name="base_arm_to_arm_rotator_joint" type="continuous" >
+		<parent link ="link_arm"/>
+		<child link="arm_rotator_link"/>
+		<origins xyz="1 1 0.2"  rpy="0 1.57 0"/>
+		<axis xyz="1 1 0.2"/>
+	</joint>
+	
 	
 	
 
