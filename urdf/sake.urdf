@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<robot name="multishapes">
+	<link name="base_link">
+		<visual>
+			<geometry>
+				<cylinder length="0.1" radius="0.1"/>
+			</geometry>
+			<material name="white">
+				<color rgba="0 0 .8 1"/>
+			</material>
+		</visual>
+	</link>
+
+	<link name="base_rotator_link">
+		<visual>
+			<geometry>
+				<sphere radius="0.09"/>
+			</geometry>
+		</visual>
+
+	</link>
+
+	<joint  name="base_to_rotoator_joint" type="continuous">
+
+		<axis xyz="0 0 1"/>
+		<parent link ="base_link"/>
+		<child link="base_rotator_link"/>
+		<origin xyz ="0 0 0.04"/>
+	</joint>
+	
+
+	<link name="link_arm">
+		<visaul>
+			<geometry>
+				<cylinder length="0.7" radius="0.08"/>
+			</geometry>
+			<material name="gray"/>
+		</visaul>
+	</link>
+
+	<joint name="base_arm_joint" type="fixed">
+    
+		<origin rpy="0 0 0" xyz="0 0.1 0.3 "/>
+		<parent link="base_rotator_link"/>
+		<child link="link_arm"/>
+	</joint>
+	
+	
+
+</robot>
